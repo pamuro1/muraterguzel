@@ -1,0 +1,1359 @@
+<!doctype html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <title>Murat Ergüzel - Portfolyo</title>
+    <link rel="canonical" href="index.html">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-image-lightbox" src="https://cdn.ampproject.org/v0/amp-image-lightbox-0.1.js"></script>
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style amp-custom>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --accent-color: #60a5fa;
+            --text-color: #1f2937;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --menu-height: 4rem;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-menu {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: var(--menu-height);
+            padding: 0 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 0.75rem 1.25rem;
+            margin: 0 0.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+
+        .nav-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+
+        .header {
+            margin-top: calc(var(--menu-height) + 1rem);
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background: var(--bg-color);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .social-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px) rotate(8deg);
+        }
+
+        .social-btn i {
+            font-size: 1.5rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .contact-btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .contact-btn-outline {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .profile-section {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 1rem;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .contact-info h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--primary-color);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .contact-info p {
+            font-size: 1.25rem;
+            color: var(--text-color);
+            margin: 0.5rem 0 0 0;
+            text-align: center;
+        }
+
+        .location {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            aspect-ratio: 16/9;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-item amp-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover amp-img {
+            opacity: 0.9;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(37, 99, 235, 0.95), rgba(59, 130, 246, 0.9));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay h3 {
+            margin: 0 0 0.3rem 0;
+            font-size: 1rem;
+        }
+
+        .portfolio-overlay a, .portfolio-overlay p {
+            font-size: 0.95rem;
+        }
+
+        .portfolio-overlay a.dokmetas-link {
+            color: #fff !important;
+            text-decoration: underline;
+        }
+
+        .experience-item {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            background: var(--bg-color);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .experience-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .experience-company {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .experience-date {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-item ul {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .experience-item li {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .contact-section {
+            padding: 2rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .contact-card h3 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .contact-card p, 
+        .contact-card a {
+            margin: 0;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-card .social-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            justify-content: center;
+        }
+
+        .social-button {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .social-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .social-button.whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .social-button.whatsapp-btn:hover {
+            background: #128C7E;
+        }
+
+        .social-button.instagram-btn {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .social-button.instagram-btn:hover {
+            opacity: 0.9;
+        }
+
+        .social-button.linkedin-btn {
+            background: #0077B5;
+            color: white;
+        }
+
+        .social-button.linkedin-btn:hover {
+            background: #005582;
+        }
+
+        .social-button.phone-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .social-button.phone-btn:hover {
+            background: #388E3C;
+        }
+
+        .social-button.email-btn {
+            background: #EA4335;
+            color: white;
+        }
+
+        .social-button.email-btn:hover {
+            background: #D62516;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .social-button.whatsapp-btn:hover {
+            background: #128C7E;
+            border-color: #128C7E;
+        }
+
+        .instagram-btn {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .linkedin-btn {
+            background: #0077B5;
+            color: white;
+        }
+
+        .phone-btn {
+            background: #4A90E2;
+            color: white;
+        }
+
+        .email-btn {
+            background: #EA4335;
+            color: white;
+        }
+
+        .social-button i {
+            font-size: 24px;
+        }
+
+        .whatsapp-btn i {
+            color: white;
+            font-size: 28px;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 2rem auto 0;
+            padding: 0 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .profile-section {
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+
+            .profile-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .contact-info h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info p {
+                font-size: 1.1rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            .nav-menu {
+                justify-content: flex-start;
+                padding: 0 0.5rem;
+            }
+
+            .nav-item {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .contact-info h1 {
+                font-size: 1.8rem;
+            }
+
+            .contact-info p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .contact-buttons {
+                gap: 0.75rem;
+            }
+
+            .social-button {
+                width: 42px;
+                height: 42px;
+            }
+
+            .social-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .experience-item {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-image {
+                width: 180px;
+                height: 180px;
+            }
+
+            .contact-info h1 {
+                font-size: 1.6rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .experience-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Yetenekler Bölümü Stilleri */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-name i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .skill-level {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-color);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress {
+            position: absolute;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .skill-item {
+                padding: 1.25rem;
+            }
+
+            .skill-name {
+                font-size: 1rem;
+            }
+
+            .skill-name i {
+                font-size: 1.3rem;
+            }
+
+            .progress-bar {
+                height: 6px;
+            }
+        }
+
+        /* Oyun Kartları Stilleri */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .device-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .device-badge i {
+            font-size: 1rem;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin: 0 0 1rem 0;
+        }
+
+        .game-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .play-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-menu">
+            <a href="#about" class="nav-item">
+                <i class="material-icons">person</i>
+                Hakkımda
+            </a>
+            <a href="#experience" class="nav-item">
+                <i class="material-icons">work</i>
+                Deneyim
+            </a>
+            <a href="#education" class="nav-item">
+                <i class="material-icons">school</i>
+                Eğitim
+            </a>
+            <a href="#portfolio" class="nav-item">
+                <i class="material-icons">apps</i>
+                Portfolyo
+            </a>
+            <a href="#certificates" class="nav-item">
+                <i class="material-icons">verified</i>
+                Sertifikalar
+            </a>
+            <a href="#skills" class="nav-item">
+                <i class="material-icons">stars</i>
+                Yetenekler
+            </a>
+            <a href="#games" class="nav-item">
+                <i class="material-icons">sports_esports</i>
+                Oyunlar
+            </a>
+            <a href="#contact" class="nav-item">
+                <i class="material-icons">contact_mail</i>
+                İletişim
+            </a>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container">
+            <div class="profile-section">
+                <amp-img class="profile-image" 
+                    src="profil.png" 
+                    width="300" 
+                    height="300" 
+                    layout="responsive" 
+                    alt="Murat Ergüzel">
+                </amp-img>
+                <div class="contact-info">
+                    <div>
+                        <h1>Murat Ergüzel</h1>
+                        <p>Bilgisayar Mühendisi</p>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="tel:+905469920440" class="social-button phone-btn" title="Ara">
+                            <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z"/>
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/905469920440" class="social-button whatsapp-btn" title="WhatsApp">
+                            <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/murottow" class="social-button instagram-btn" target="_blank" title="Instagram">
+                            <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/muraterguzel" class="social-button linkedin-btn" target="_blank" title="LinkedIn">
+                            <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:mmuraterguzel98@gmail.com" class="social-button email-btn" title="E-posta">
+                            <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section" id="about">
+            <h2 class="section-title">Hakkımda</h2>
+            <p>Merhaba, ben Murat Ergüzel. 14 Haziran 1998 tarihinde Tokat'ta doğdum. Çocukluk yıllarım ve eğitim hayatım boyunca İstanbul'da yaşadım. Kütahya Dumlupınar Üniversitesi Bilgisayar Mühendisliği bölümünden mezun olduktan sonra, 2023 yılında iş dolayısıyla Kıbrıs'a taşındım ve burada yaşamaya başladım.</p>
+            
+            <p>Boş zamanlarımda satranç oynamayı, basketbol oynamayı, film izlemeyi ve doğayla iç içe vakit geçirerek kamp yapmayı seviyorum. Teknolojiye olan ilgim ve mühendislik alanındaki birikimimle hem profesyonel hem de kişisel olarak kendimi sürekli geliştirmeye çalışıyorum.</p>
+        </section>
+
+        <section class="section" id="experience">
+            <h2 class="section-title">İş Deneyimi</h2>
+            <div class="experience-item">
+                <h3 class="experience-title">Bilgi İşlem Uzmanı</h3>
+                <p class="experience-company">Akfinans Bank / Lefkoşa</p>
+                <p class="experience-date">Haziran 2024 - Devam ediyor</p>
+                <ul>
+                    <li>Ağ ve sistem altyapısında yer alan cihazların (bilgisayar, telefon, switch, yazıcı, güvenlik sistemleri vb.) kurulumu, yapılandırılması ve yönetim süreçlerinde görev aldım.</li>
+                    <li>Banka genelindeki donanım ve yazılım sorunlarının çözümünü sağlayarak, operasyonel sürekliliği destekledim.</li>
+                    <li>Teknik sorunların giderilmesi, sistem iyileştirmeleri ve yeni özellik taleplerinin değerlendirilmesi gibi süreçlerde iç ve dış paydaşlarla etkin bir iletişim kurarak çözümler ürettim.</li>
+                    <li>Kullanıcı hesap yönetimi, e-posta servisleri ve diğer altyapı hizmetlerinin idaresiyle operasyonel destek sağladım.</li>
+                    <li>Web sitesi düzenlemeleri, veri analizi ve süreç otomasyonları gibi iş geliştirme projeleriyle operasyonel verimliliği artırmaya katkıda bulundum.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title">Freelance Game Tester</h3>
+                <p class="experience-company">Giant Avocado Games / İstanbul</p>
+                <p class="experience-date">Temmuz 2024 - Ocak 2025</p>
+                <ul>
+                    <li>Android mobil oyunlarda manuel testler yaparak kullanıcı deneyimi, performans ve hataları analiz ettim.</li>
+                    <li>Smartlook ile oyuncu oturumlarını izleyip sorunları geliştirici ekibe ilettim.</li>
+                    <li>Jira üzerinden hata ve öneri takibini gerçekleştirdim, geliştirilen ve değiştirilen kısımları kontrol ederek geri bildirim sağladım.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title">Bilgi İşlem Destek Elemanı</h3>
+                <p class="experience-company">Şevket Hançerli Tic. Ltd. / Lefkoşa</p>
+                <p class="experience-date">Ekim 2023 - Nisan 2024</p>
+                <ul>
+                    <li>Netsis ERP sistemi üzerinden stok yönetimi ve raporlama süreçlerinde görev aldım. Operasyonel süreçlerin sorunsuz yürütülmesi için kullanıcılara teknik destek sağladım.</li>
+                    <li>Araç takip, mail, parmak izi ve diğer teknolojilerin yönetimini üstlendim; bu sistemlerle ilgili düzenlemeler ve raporlamalar gerçekleştirdim.</li>
+                    <li>Excel üzerinde makrolar kullanarak detaylı analizler ve görselleştirilmiş raporlar oluşturdum.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title">Mağaza Sorumlusu</h3>
+                <p class="experience-company">Kılıf & Kılıf / Lefkoşa</p>
+                <p class="experience-date">Ocak 2023 - Temmuz 2023</p>
+                <ul>
+                    <li>Teknoloji mağazasında satış danışmanı ve kasiyer olarak görev aldım. Stok takibi, ürün tedariği ve raf yerleşiminde düzenlemeler yaparak mağaza operasyonlarının daha verimli bir şekilde yürütülmesini sağladım.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title">Bilgi İşlem Stajyeri</h3>
+                <p class="experience-company">Eurocross Turkey / İstanbul</p>
+                <p class="experience-date">Mart 2022 - Nisan 2022</p>
+                <ul>
+                    <li>Şirketin intranet sitesini geliştirdim ve operasyon ekibine teknik destek sağladım.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <h2 class="section-title">Eğitim</h2>
+            <div class="experience-item">
+                <h3 class="experience-title">Bilgisayar Mühendisliği</h3>
+                <p class="experience-company">Kütahya Dumlupınar Üniversitesi</p>
+                <p class="experience-date">2016 - 2022</p>
+                <p>Not Ortalaması: 3.12 / 4.00</p>
+            </div>
+        </section>
+
+        <section class="section" id="portfolio">
+            <h2 class="section-title">Portfolyo</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <amp-img src="proje1.png" 
+                        width="300" 
+                        height="250" 
+                        layout="responsive" 
+                        alt="Dokmetasgrup"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="Dokmetasgrup Web Sitesi projesini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>Dokmetasgrup Web Sitesi</h3>
+                        <a href="http://www.dokmetasgrup.com" target="_blank" class="dokmetas-link">www.dokmetasgrup.com</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <amp-img src="proje2.png" 
+                        width="300" 
+                        height="250" 
+                        layout="responsive" 
+                        alt="Android Oyun"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="Android Oyun projesini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>2D Platform Macera Oyunu</h3>
+                        <p>Google Play'de yayınlandı</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <amp-img src="proje3.png" 
+                        width="300" 
+                        height="250" 
+                        layout="responsive" 
+                        alt="Eurocross Turkey"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="Eurocross Turkey projesini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>İlkon Home Web Sitesi</h3>
+						<a href="https://ilkonhome.com/" target="_blank" class="dokmetas-link">www.ilkonhome.com</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <amp-img src="proje4.png" 
+                        width="300" 
+                        height="250" 
+                        layout="responsive" 
+                        alt="Arduino Araba"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="Arduino Araba projesini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>Arduino ile Engelden Kaçan Araba</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <amp-img src="proje5.png" 
+                        width="300" 
+                        height="250" 
+                        layout="responsive" 
+                        alt="Arduino Hava İstasyonu"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="Arduino Hava İstasyonu projesini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>Arduino ile Hava İstasyonu</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <amp-img src="proje6.png" 
+                        width="300" 
+                        height="250" 
+                        layout="responsive" 
+                        alt="3D Bulmaca Macera Oyunu"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="3D Bulmaca Macera Oyunu projesini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>3D Bulmaca Macera Oyunu</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="certificates">
+            <h2 class="section-title">Sertifikalar</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <amp-img src="sertifika1.png"
+                        width="300"
+                        height="250"
+                        layout="responsive"
+                        alt="Sertifika 1"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="Sertifika 1 görselini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>İHA-0 Pilot Belgesi</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <amp-img src="sertifika2.png"
+                        width="300"
+                        height="250"
+                        layout="responsive"
+                        alt="Sertifika 2"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="Sertifika 2 görselini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>İHA-1 Pilot Belgesi</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <amp-img src="sertifika3.png"
+                        width="300"
+                        height="250"
+                        layout="responsive"
+                        alt="Sertifika 3"
+                        role="button"
+                        tabindex="0"
+                        on="tap:lightbox"
+                        aria-label="Sertifika 3 görselini büyüt"></amp-img>
+                    <div class="portfolio-overlay">
+                        <h3>Sertifika 3</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <h2 class="section-title">Yetenekler</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">
+                            <i class="material-icons">computer</i>
+                            Microsoft Office
+                        </span>
+                        <span class="skill-level">İleri Seviye</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 95%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">
+                            <i class="material-icons">storage</i>
+                            MSSQL
+                        </span>
+                        <span class="skill-level">Orta Seviye</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 50%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">
+                            <i class="material-icons">code</i>
+                            HTML, CSS, JavaScript
+                        </span>
+                        <span class="skill-level">İyi Seviye</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">
+                            <i class="material-icons">web</i>
+                            WordPress
+                        </span>
+                        <span class="skill-level">İyi Seviye</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">
+                            <i class="material-icons">sports_esports</i>
+                            Unity
+                        </span>
+                        <span class="skill-level">İyi Seviye</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 70%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">
+                            <i class="material-icons">developer_mode</i>
+                            C#
+                        </span>
+                        <span class="skill-level">İyi Seviye</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 70%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">
+                            <i class="material-icons">brush</i>
+                            Adobe Photoshop
+                        </span>
+                        <span class="skill-level">Orta Seviye</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="games">
+            <h2 class="section-title">Mini Oyunlar</h2>
+            <div class="games-section">
+                <div class="games-grid">
+                    <div class="game-card">
+                        <span class="device-badge">
+                            <i class="material-icons">computer</i>
+                            <i class="material-icons">phone_android</i>
+                        </span>
+                        <i class="material-icons game-icon">sports_mma</i>
+                        <h3 class="game-title">Taş Kağıt Makas</h3>
+                        <p class="game-description">Klasik Taş Kağıt Makas oyununu bilgisayara karşı oynayın. Skorunuzu takip edin ve eğlenceli vakit geçirin!</p>
+                        <a href="oyunlar/taskagitmakas/index.html" class="play-button">
+                            <i class="material-icons">play_circle</i>
+                            Hemen Oyna
+                        </a>
+                    </div>
+
+                    <div class="game-card">
+                        <span class="device-badge">
+                            <i class="material-icons">computer</i>
+                            <i class="material-icons">phone_android</i>
+                        </span>
+                        <i class="material-icons game-icon">style</i>
+                        <h3 class="game-title">BlackJack</h3>
+                        <p class="game-description">21'e en yakın olmaya çalışın! Klasik kart oyunu BlackJack'i modern bir arayüzle oynayın.</p>
+                        <a href="oyunlar/blackjack/index.html" class="play-button">
+                            <i class="material-icons">play_circle</i>
+                            Hemen Oyna
+                        </a>
+                    </div>
+
+                    <div class="game-card">
+                        <span class="device-badge">
+                            <i class="material-icons">computer</i>
+                            <i class="material-icons">phone_android</i>
+                        </span>
+                        <i class="material-icons game-icon">memory</i>
+                        <h3 class="game-title">Hafıza Oyunu</h3>
+                        <p class="game-description">Eşleşen kartları bulun! Hafızanızı test edin ve eğlenceli emojileri eşleştirin. Skorunuzu yükseltin!</p>
+                        <a href="oyunlar/hafiza/index.html" class="play-button">
+                            <i class="material-icons">play_circle</i>
+                            Hemen Oyna
+                        </a>
+                    </div>
+
+                    <div class="game-card">
+                        <span class="device-badge">
+                            <i class="material-icons">computer</i>
+                            <i class="material-icons">phone_android</i>
+                        </span>
+                        <i class="material-icons game-icon">casino</i>
+                        <h3 class="game-title">Sayı Tahmin</h3>
+                        <p class="game-description">1-100 arasındaki gizli sayıyı bulun! İpuçlarını takip ederek en az denemede sayıyı tahmin edin.</p>
+                        <a href="oyunlar/sayitahmin/index.html" class="play-button">
+                            <i class="material-icons">play_circle</i>
+                            Hemen Oyna
+                        </a>
+                    </div>
+
+                    <div class="game-card">
+                        <span class="device-badge">
+                            <i class="material-icons">computer</i>
+                            <i class="material-icons">phone_android</i>
+                        </span>
+                        <i class="material-icons game-icon">flight</i>
+                        <h3 class="game-title">Flappy Bird</h3>
+                        <p class="game-description">Klasik Flappy Bird oyununu modern bir tasarımla oynayın! Kuşunuzu engellere çarpmadan ilerletin.</p>
+                        <a href="oyunlar/flappybird/index.html" class="play-button">
+                            <i class="material-icons">play_circle</i>
+                            Hemen Oyna
+                        </a>
+                    </div>
+
+                    <div class="game-card">
+                        <span class="device-badge">
+                            <i class="material-icons">computer</i>
+                            <i class="material-icons">phone_android</i>
+                        </span>
+                        <i class="material-icons game-icon">grid_on</i>
+                        <h3 class="game-title">Tetris</h3>
+                        <p class="game-description">Klasik Tetris oyununu modern bir arayüzle oynayın! Blokları yerleştirin ve satırları temizleyin.</p>
+                        <a href="oyunlar/tetris/index.html" class="play-button">
+                            <i class="material-icons">play_circle</i>
+                            Hemen Oyna
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <h2 class="section-title">İletişim</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="social-button phone-btn">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z"/>
+                        </svg>
+                    </div>
+                    <h3>Telefon</h3>
+                    <a href="tel:+905469920440">+90 546 992 04 40</a>
+                </div>
+                <div class="contact-card">
+                    <div class="social-button email-btn">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/>
+                        </svg>
+                    </div>
+                    <h3>E-posta</h3>
+                    <a href="mailto:mmuraterguzel98@gmail.com">mmuraterguzel98@gmail.com</a>
+                </div>
+                <div class="contact-card">
+                    <div class="social-button whatsapp-btn">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                        </svg>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <a href="https://wa.me/905469920440">+90 546 992 04 40</a>
+                </div>
+                <div class="contact-card">
+                    <div class="social-button instagram-btn">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                        </svg>
+                    </div>
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/murat.erguzel" target="_blank">@murat.erguzel</a>
+                </div>
+                <div class="contact-card">
+                    <div class="social-button linkedin-btn">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+                        </svg>
+                    </div>
+                    <h3>LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/muraterguzel" target="_blank">Murat Ergüzel</a>
+                </div>
+                <div class="contact-card">
+                    <i class="material-icons">location_on</i>
+                    <h3>Konum</h3>
+                    <p>Lefkoşa / KKTC</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <amp-image-lightbox id="lightbox" layout="nodisplay"></amp-image-lightbox>
+</body>
+</html> 
