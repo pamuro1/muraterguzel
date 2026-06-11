@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            font-family: Arial, sans-serif;
+            touch-action: none;
+        }
+
+        .game-container {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        canvas {
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 2px solid white;
+            border-radius: 5px;
+            background: #4dc9ff;
+            margin: 20px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1000;
+        }
+
+        .home-button:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .game-ui {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .high-score {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            display: none;
+        }
+
+        .game-over h2 {
+            margin: 0 0 20px 0;
+            font-size: 2rem;
+        }
+
+        .restart-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            z-index: 1000;
+        }
+
+        .mobile-jump-btn {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4CAF50;
+            color: white;
+            font-size: 2rem;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            z-index: 1001;
+            cursor: pointer;
+        }
+        .mobile-jump-btn:active {
+            background: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            canvas {
+                margin: 10px;
+            }
+
+            .score {
+                font-size: 1.5em;
+            }
+
+            .controls {
+                font-size: 1.2em;
+                padding: 20px;
+            }
+
+            .mobile-jump-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='../../index.html'">
+        <i class="material-icons">home</i>
+        Ana Sayfa
+    </button>
+
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div class="game-ui">
+            <div class="score">0</div>
+            <div class="high-score">En Yüksek: 0</div>
+        </div>
+        <div class="game-over">
+            <h2>Oyun Bitti!</h2>
+            <p>Skorun: <span class="final-score">0</span></p>
+            <button class="restart-button" onclick="restartGame()">
+                <i class="material-icons">replay</i>
+                Tekrar Oyna
+            </button>
+        </div>
+    </div>
+
+    <div class="controls">
+        Oynamak için ekrana dokun veya SPACE tuşuna bas
+    </div>
+
+    <button class="mobile-jump-btn" onclick="jump()">Zıpla</button>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.querySelector('.score');
+        const highScoreElement = document.querySelector('.high-score');
+        const gameOverScreen = document.querySelector('.game-over');
+        const finalScoreElement = document.querySelector('.final-score');
+
+        // Canvas boyutları
+        canvas.width = 400;
+        canvas.height = 600;
+
+        // Oyun değişkenleri
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        let bird = {
+            x: 50,
+            y: canvas.height / 2,
+            velocity: 0,
+            gravity: isMobile() ? 0.22 : 0.35,
+            jump: isMobile() ? -5 : -6.5,
+            size: 30,
+            rotation: 0
+        };
+
+        let pipes = [];
+        let score = 0;
+        let highScore = localStorage.getItem('flappyHighScore') || 0;
+        let gameStarted = false;
+        let gameOver = false;
+        const pipeGap = 150;
+        const pipeWidth = 50;
+        const pipeSpacing = 200;
+        let pipeSpeed = isMobile() ? 1.2 : 2;
+
+        // Kuş rengi ve gradyanı
+        const birdGradient = ctx.createLinearGradient(0, 0, 30, 0);
+        birdGradient.addColorStop(0, '#FFD700');
+        birdGradient.addColorStop(1, '#FFA500');
+
+        // Oyunu başlat
+        function startGame() {
+            gameStarted = true;
+            gameOver = false;
+            bird.y = canvas.height / 2;
+            bird.velocity = 0;
+            pipes = [];
+            score = 0;
+            gameOverScreen.style.display = 'none';
+            scoreElement.textContent = score;
+            highScoreElement.textContent = `En Yüksek: ${highScore}`;
+            animate();
+        }
+
+        // Kuşu zıplat
+        function jump() {
+            if (!gameStarted) {
+                startGame();
+            }
+            if (!gameOver) {
+                bird.velocity = bird.jump;
+            }
+        }
+
+        // Yeni boru oluştur
+        function createPipe() {
+            const gapPosition = Math.random() * (canvas.height - pipeGap - 100) + 50;
+            pipes.push({
+                x: canvas.width,
+                topHeight: gapPosition,
+                passed: false
+            });
+        }
+
+        // Çarpışma kontrolü
+        function checkCollision(pipe) {
+            const birdRight = bird.x + bird.size;
+            const birdLeft = bird.x;
+            const birdTop = bird.y;
+            const birdBottom = bird.y + bird.size;
+            const pipeLeft = pipe.x;
+            const pipeRight = pipe.x + pipeWidth;
+            const pipeTop = pipe.topHeight;
+            const pipeBottom = pipe.topHeight + pipeGap;
+
+            return (
+                birdRight > pipeLeft &&
+                birdLeft < pipeRight &&
+                (birdTop < pipeTop || birdBottom > pipeBottom)
+            );
+        }
+
+        // Oyun döngüsü
+        function animate() {
+            if (gameOver) return;
+
+            // Canvas'ı temizle
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Arkaplan
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Kuşu güncelle
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+
+            // Kuşu çiz
+            ctx.save();
+            ctx.translate(bird.x + bird.size/2, bird.y + bird.size/2);
+            bird.rotation = Math.max(-25, Math.min(25, bird.velocity * 3));
+            ctx.rotate(bird.rotation * Math.PI / 180);
+            ctx.fillStyle = birdGradient;
+            ctx.beginPath();
+            ctx.arc(0, 0, bird.size/2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Kuşun gözünü ekle
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(bird.size/4, -bird.size/6, bird.size/8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = 'black';
+            ctx.beginPath();
+            ctx.arc(bird.size/4, -bird.size/6, bird.size/16, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Gagayı ekle
+            ctx.fillStyle = 'orange';
+            ctx.beginPath();
+            ctx.moveTo(bird.size/3, 0);
+            ctx.lineTo(bird.size/2, -bird.size/8);
+            ctx.lineTo(bird.size/2, bird.size/8);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.restore();
+
+            // Boruları yönet
+            if (gameStarted && pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - pipeSpacing) {
+                createPipe();
+            }
+
+            // Boruları çiz ve güncelle
+            pipes.forEach((pipe, index) => {
+                pipe.x -= pipeSpeed;
+
+                // Üst boru
+                ctx.fillStyle = '#2E8B57';
+                ctx.fillRect(pipe.x, 0, pipeWidth, pipe.topHeight);
+
+                // Alt boru
+                ctx.fillRect(pipe.x, pipe.topHeight + pipeGap, pipeWidth, canvas.height);
+
+                // Skor kontrolü
+                if (!pipe.passed && bird.x > pipe.x + pipeWidth) {
+                    pipe.passed = true;
+                    score++;
+                    scoreElement.textContent = score;
+                }
+
+                // Çarpışma kontrolü
+                if (checkCollision(pipe)) {
+                    gameOver = true;
+                    if (score > highScore) {
+                        highScore = score;
+                        localStorage.setItem('flappyHighScore', highScore);
+                        highScoreElement.textContent = `En Yüksek: ${highScore}`;
+                    }
+                    finalScoreElement.textContent = score;
+                    gameOverScreen.style.display = 'block';
+                }
+            });
+
+            // Eski boruları temizle
+            pipes = pipes.filter(pipe => pipe.x > -pipeWidth);
+
+            // Zemin ve tavan kontrolü
+            if (bird.y < 0 || bird.y + bird.size > canvas.height) {
+                gameOver = true;
+                finalScoreElement.textContent = score;
+                gameOverScreen.style.display = 'block';
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                jump();
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+
+        function restartGame() {
+            startGame();
+        }
+
+        // İlk çizim
+        ctx.fillStyle = '#87CEEB';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = birdGradient;
+        ctx.beginPath();
+        ctx.arc(bird.x + bird.size/2, bird.y + bird.size/2, bird.size/2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Mobilde ekrana dokununca da zıplasın
+        if (isMobile()) {
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                jump();
+            });
+        }
+    </script>
+</body>
+</html> 

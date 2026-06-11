@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackJack</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #ffd700;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .game-table {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hand {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .hand-title {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .hand-total {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            color: #ffd700;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            color: #000;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            min-width: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        .card.red {
+            color: #e74c3c;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        #dealBtn {
+            background: #ffd700;
+            color: #000;
+        }
+
+        #hitBtn {
+            background: #2ecc71;
+            color: white;
+        }
+
+        #standBtn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #result {
+            font-size: 1.4rem;
+            color: #ffd700;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 1rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            button {
+                width: 100%;
+                font-size: 1.3rem;
+                padding: 1.2rem 0;
+            }
+
+            .card {
+                padding: 1.2rem 1.5rem;
+                font-size: 1.4rem;
+            }
+        }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 1.2rem 2.2rem;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(44, 52, 54, 0.9);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            background: #2c3e50;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .home-button {
+                padding: 1.1rem 2rem;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='../../index.html'">Ana Sayfa</button>
+    <div class="game-container">
+        <h1>BlackJack</h1>
+        <div class="game-table">
+            <div class="hand">
+                <div class="hand-title">Dağıtıcı</div>
+                <div class="hand-total" id="dealerTotal">Toplam: ?</div>
+                <div id="dealerHand" class="cards"></div>
+            </div>
+            <div class="hand">
+                <div class="hand-title">Oyuncu</div>
+                <div class="hand-total" id="playerTotal">Toplam: 0</div>
+                <div id="playerHand" class="cards"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="dealBtn">Yeni El</button>
+            <button id="hitBtn" disabled>Kart Çek</button>
+            <button id="standBtn" disabled>Kal</button>
+        </div>
+        <div id="result">Yeni el dağıtmak için "Yeni El" butonuna tıklayın</div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 
