@@ -19,9 +19,3 @@ Bu proje, Murat Ergüzel'in kişisel portfolyo sitesidir. Anasayfada AMP teknolo
 ## Geliştirme
 
 Anasayfa AMP kurallarına uygun olarak geliştirilmiştir. Değişiklik yaparken AMP validasyonunu kontrol etmeyi unutmayın.
-
-## İletişim
-
-- Email: mmuraterguzel98@gmail.com
-- LinkedIn: muraterguzel
-- Instagram: murottow 
