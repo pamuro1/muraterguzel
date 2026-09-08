@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayı Tahmin</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .game-info {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        input {
+            padding: 1rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            width: 100px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            min-width: 120px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #result {
+            font-size: 1.4rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .history {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-guess {
+            font-weight: bold;
+        }
+
+        .history-result {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 1rem;
+            }
+
+            .input-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.2rem;
+            }
+
+            input {
+                width: 100%;
+                font-size: 1.3rem;
+                padding: 1.3rem;
+            }
+
+            button {
+                width: 100%;
+                font-size: 1.3rem;
+                padding: 1.2rem 0;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stat {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .history {
+                font-size: 1.1rem;
+            }
+        }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 1.2rem 2.2rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(44, 52, 54, 0.9);
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            background: #2c3e50;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='../../index.html'">Ana Sayfa</button>
+    <div class="game-container">
+        <h1>Sayı Tahmin</h1>
+        <div class="game-info">
+            1 ile 100 arasında bir sayı tuttum. Haydi tahmin et!
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Deneme</div>
+                <div id="attempts" class="stat-value">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">En İyi Skor</div>
+                <div id="bestScore" class="stat-value">-</div>
+            </div>
+        </div>
+        <div class="input-group">
+            <input type="number" id="guess" min="1" max="100" placeholder="1-100">
+            <button id="guessBtn">Tahmin Et</button>
+        </div>
+        <div id="result"></div>
+        <div class="history">
+            <h3>Tahmin Geçmişi</h3>
+            <div id="guessHistory"></div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 

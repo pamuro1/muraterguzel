@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: Arial, sans-serif;
+            color: white;
+            touch-action: none;
+        }
+
+        .game-container {
+            position: relative;
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        canvas {
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1000;
+        }
+
+        .home-button:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .game-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .score-container {
+            margin-bottom: 20px;
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .next-piece {
+            margin-top: 20px;
+        }
+
+        .keyboard-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 25px;
+            touch-action: none;
+            z-index: 1000;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: none;
+        }
+
+        .control-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            display: none;
+        }
+
+        .game-over h2 {
+            margin: 0 0 20px 0;
+            font-size: 2rem;
+        }
+
+        .restart-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .mobile-drop-btn {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4CAF50;
+            color: white;
+            font-size: 2rem;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            z-index: 1001;
+            cursor: pointer;
+        }
+
+        .mobile-drop-btn:active {
+            background: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            .keyboard-info {
+                display: none;
+            }
+            
+            .game-container {
+                margin: 10px;
+            }
+
+            .controls {
+                padding: 20px;
+                gap: 18px;
+            }
+
+            .control-btn {
+                width: 56px;
+                height: 56px;
+                font-size: 26px;
+            }
+
+            .mobile-drop-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='../../index.html'">
+        <i class="material-icons">home</i>
+        Ana Sayfa
+    </button>
+
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div class="game-info">
+            <div class="score-container">
+                <div class="score-label">Skor:</div>
+                <div class="score">0</div>
+            </div>
+            <div class="next-piece">
+                <div class="score-label">Sıradaki:</div>
+                <canvas id="nextPieceCanvas"></canvas>
+            </div>
+            <div class="keyboard-info">
+                <div class="score-label">Kontroller:</div>
+                <div style="margin-top: 10px;">
+                    ← → : Sağa/Sola hareket<br>
+                    ↑ : Döndür<br>
+                    ↓ : Hızlı düşür<br>
+                    SPACE : Anında düşür
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="control-btn" id="leftBtn">←</button>
+        <button class="control-btn" id="rotateBtn">↻</button>
+        <button class="control-btn" id="downBtn">↓</button>
+        <button class="control-btn" id="dropBtn">↓↓</button>
+        <button class="control-btn" id="rightBtn">→</button>
+    </div>
+
+    <div class="game-over">
+        <h2>Oyun Bitti!</h2>
+        <p>Skorun: <span class="final-score">0</span></p>
+        <button class="restart-button" onclick="restartGame()">
+            <i class="material-icons">replay</i>
+            Tekrar Oyna
+        </button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const nextPieceCanvas = document.getElementById('nextPieceCanvas');
+        const ctx = canvas.getContext('2d');
+        const nextCtx = nextPieceCanvas.getContext('2d');
+        const scoreElement = document.querySelector('.score');
+        const gameOverScreen = document.querySelector('.game-over');
+        const finalScoreElement = document.querySelector('.final-score');
+
+        // Oyun sabitleri
+        const COLS = 10;
+        const ROWS = 20;
+        const BLOCK_SIZE = 30;
+        const NEXT_BLOCK_SIZE = 25;
+
+        // Canvas boyutları
+        canvas.width = COLS * BLOCK_SIZE;
+        canvas.height = ROWS * BLOCK_SIZE;
+        nextPieceCanvas.width = 4 * NEXT_BLOCK_SIZE;
+        nextPieceCanvas.height = 4 * NEXT_BLOCK_SIZE;
+
+        // Tetromino şekilleri
+        const SHAPES = [
+            [[1, 1, 1, 1]], // I
+            [[1, 1], [1, 1]], // O
+            [[1, 1, 1], [0, 1, 0]], // T
+            [[1, 1, 1], [1, 0, 0]], // L
+            [[1, 1, 1], [0, 0, 1]], // J
+            [[1, 1, 0], [0, 1, 1]], // S
+            [[0, 1, 1], [1, 1, 0]]  // Z
+        ];
+
+        // Tetromino renkleri
+        const COLORS = [
+            '#00f0f0', // I - Cyan
+            '#f0f000', // O - Yellow
+            '#a000f0', // T - Purple
+            '#f0a000', // L - Orange
+            '#0000f0', // J - Blue
+            '#00f000', // S - Green
+            '#f00000'  // Z - Red
+        ];
+
+        let board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+        let score = 0;
+        let currentPiece = null;
+        let nextPiece = null;
+        let gameOver = false;
+        let dropCounter = 0;
+        let lastTime = 0;
+        let dropInterval = 1000;
+
+        class Piece {
+            constructor(shape, color) {
+                this.shape = shape;
+                this.color = color;
+                this.x = Math.floor(COLS / 2) - Math.floor(shape[0].length / 2);
+                this.y = 0;
+            }
+
+            rotate() {
+                const rotated = this.shape[0].map((_, i) =>
+                    this.shape.map(row => row[i]).reverse()
+                );
+                if (!this.checkCollision(0, 0, rotated)) {
+                    this.shape = rotated;
+                }
+            }
+
+            checkCollision(offsetX, offsetY, shape = this.shape) {
+                for (let y = 0; y < shape.length; y++) {
+                    for (let x = 0; x < shape[y].length; x++) {
+                        if (shape[y][x]) {
+                            const newX = this.x + x + offsetX;
+                            const newY = this.y + y + offsetY;
+                            if (newX < 0 || newX >= COLS || newY >= ROWS ||
+                                (newY >= 0 && board[newY][newX])) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
+            move(dir) {
+                if (!this.checkCollision(dir, 0)) {
+                    this.x += dir;
+                }
+            }
+
+            drop() {
+                if (!this.checkCollision(0, 1)) {
+                    this.y++;
+                    return true;
+                }
+                this.freeze();
+                return false;
+            }
+
+            hardDrop() {
+                while (this.drop()) {}
+            }
+
+            freeze() {
+                let isGameOver = false;
+                this.shape.forEach((row, y) => {
+                    row.forEach((value, x) => {
+                        if (value) {
+                            if (this.y + y < 0) {
+                                isGameOver = true;
+                            }
+                            board[this.y + y][this.x + x] = this.color;
+                        }
+                    });
+                });
+
+                if (isGameOver) {
+                    gameOver = true;
+                    return;
+                }
+                clearLines();
+                currentPiece = nextPiece;
+                nextPiece = createPiece();
+                drawNextPiece();
+                if (currentPiece.checkCollision(0, 0)) {
+                    gameOver = true;
+                }
+            }
+        }
+
+        function createPiece() {
+            const index = Math.floor(Math.random() * SHAPES.length);
+            return new Piece([...SHAPES[index]], COLORS[index]);
+        }
+
+        function clearLines() {
+            let linesCleared = 0;
+            for (let y = ROWS - 1; y >= 0; y--) {
+                if (board[y].every(value => value)) {
+                    board.splice(y, 1);
+                    board.unshift(Array(COLS).fill(0));
+                    linesCleared++;
+                    y++;
+                }
+            }
+            if (linesCleared > 0) {
+                score += [40, 100, 300, 1200][linesCleared - 1];
+                scoreElement.textContent = score;
+                // Hızı artır
+                dropInterval = Math.max(100, 1000 - Math.floor(score / 100) * 50);
+            }
+        }
+
+        function draw() {
+            // Tahtayı temizle
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Izgarayı çiz
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            for (let x = 0; x < COLS; x++) {
+                for (let y = 0; y < ROWS; y++) {
+                    ctx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+                }
+            }
+
+            // Yerleşmiş parçaları çiz
+            board.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value) {
+                        ctx.fillStyle = value;
+                        ctx.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+                    }
+                });
+            });
+
+            // Aktif parçayı çiz
+            if (currentPiece) {
+                ctx.fillStyle = currentPiece.color;
+                currentPiece.shape.forEach((row, y) => {
+                    row.forEach((value, x) => {
+                        if (value) {
+                            ctx.fillRect(
+                                (currentPiece.x + x) * BLOCK_SIZE,
+                                (currentPiece.y + y) * BLOCK_SIZE,
+                                BLOCK_SIZE - 1,
+                                BLOCK_SIZE - 1
+                            );
+                        }
+                    });
+                });
+            }
+        }
+
+        function drawNextPiece() {
+            nextCtx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            nextCtx.fillRect(0, 0, nextPieceCanvas.width, nextPieceCanvas.height);
+
+            if (nextPiece) {
+                const offsetX = (4 - nextPiece.shape[0].length) / 2;
+                const offsetY = (4 - nextPiece.shape.length) / 2;
+
+                nextCtx.fillStyle = nextPiece.color;
+                nextPiece.shape.forEach((row, y) => {
+                    row.forEach((value, x) => {
+                        if (value) {
+                            nextCtx.fillRect(
+                                (x + offsetX) * NEXT_BLOCK_SIZE,
+                                (y + offsetY) * NEXT_BLOCK_SIZE,
+                                NEXT_BLOCK_SIZE - 1,
+                                NEXT_BLOCK_SIZE - 1
+                            );
+                        }
+                    });
+                });
+            }
+        }
+
+        function update(time = 0) {
+            if (gameOver) {
+                gameOverScreen.style.display = 'block';
+                finalScoreElement.textContent = score;
+                return;
+            }
+
+            const deltaTime = time - lastTime;
+            lastTime = time;
+            dropCounter += deltaTime;
+
+            if (dropCounter > dropInterval) {
+                currentPiece.drop();
+                dropCounter = 0;
+            }
+
+            draw();
+            requestAnimationFrame(update);
+        }
+
+        function startGame() {
+            board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+            score = 0;
+            dropInterval = 1000;
+            gameOver = false;
+            scoreElement.textContent = '0';
+            gameOverScreen.style.display = 'none';
+            currentPiece = createPiece();
+            nextPiece = createPiece();
+            drawNextPiece();
+            if (currentPiece.checkCollision(0, 0)) {
+                gameOver = true;
+                gameOverScreen.style.display = 'block';
+                finalScoreElement.textContent = score;
+                return;
+            }
+            update();
+        }
+
+        function restartGame() {
+            window.location.reload();
+        }
+
+        // Anında düşür butonu fonksiyonu
+        function handleHardDrop() {
+            if (!gameOver && currentPiece) {
+                currentPiece.hardDrop();
+            }
+        }
+
+        // Tüm platformlarda butonlara tıklama ve dokunma desteği
+        document.getElementById('leftBtn').addEventListener('click', () => { if (!gameOver && currentPiece) currentPiece.move(-1); });
+        document.getElementById('rightBtn').addEventListener('click', () => { if (!gameOver && currentPiece) currentPiece.move(1); });
+        document.getElementById('rotateBtn').addEventListener('click', () => { if (!gameOver && currentPiece) currentPiece.rotate(); });
+        document.getElementById('downBtn').addEventListener('click', () => { if (!gameOver && currentPiece) currentPiece.drop(); });
+        document.getElementById('dropBtn').addEventListener('click', handleHardDrop);
+
+        // Mobilde dokunma desteği
+        if (isMobile()) {
+            document.getElementById('leftBtn').addEventListener('touchstart', (e) => { e.preventDefault(); if (!gameOver && currentPiece) currentPiece.move(-1); });
+            document.getElementById('rightBtn').addEventListener('touchstart', (e) => { e.preventDefault(); if (!gameOver && currentPiece) currentPiece.move(1); });
+            document.getElementById('rotateBtn').addEventListener('touchstart', (e) => { e.preventDefault(); if (!gameOver && currentPiece) currentPiece.rotate(); });
+            document.getElementById('downBtn').addEventListener('touchstart', (e) => { e.preventDefault(); if (!gameOver && currentPiece) currentPiece.drop(); });
+            document.getElementById('dropBtn').addEventListener('touchstart', (e) => { e.preventDefault(); handleHardDrop(); });
+        }
+
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        startGame();
+    </script>
+</body>
+</html> 
